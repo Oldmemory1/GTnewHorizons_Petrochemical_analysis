@@ -66,7 +66,7 @@ class oil{
     void OutPutData(){//输出数据用来检验 
     	cout<<"原油类型号："<<this->TypeInInt<<endl;
     	cout<<"原油类型："<<this->TypeInString<<endl;
-    	printf("产出重油总量：%lf，产出轻燃油总量：%lf，产出石脑油总量：%lf，产出炼油气总量：%lf\n",this->HeavyOilAmount,this->LightOilAmount,this->NaphthaAmount,this->GasAmount);
+    	printf("产出重燃油总量：%lf，产出轻燃油总量：%lf，产出石脑油总量：%lf，产出炼油气总量：%lf\n",this->HeavyOilAmount,this->LightOilAmount,this->NaphthaAmount,this->GasAmount);
 	}
     double GetHeavyOilAmount(){
     	return this->HeavyOilAmount;
@@ -95,6 +95,7 @@ class All{
 	double LightOilAmount;
 	double NaphthaAmount;
 	double GasAmount;
+	int GetFuel;//为0时，不生产高十六，为1时，生产高16 
 	int HeavyOilCrackedType;//重燃油裂化方式
 	// 0：直接蒸馏 1：轻度氢气 2：中度氢气 3：重度氢气 4：轻度蒸汽 5：中度蒸汽 6：重度蒸汽 
 	int LightOilCrackedType;//轻燃油裂化方式 
@@ -123,6 +124,7 @@ class All{
 		 double butadiene;//丁二烯 
 		 double phenol;//苯酚 
 		 double TinyCarbonDust;//小撮碳粉	
+		 double NitroFuel;//高十六 
 		 public:
 		 void Initialization(){
 		 	this->methane=0;
@@ -139,77 +141,82 @@ class All{
 			this->TinyCarbonDust=0; 
 			this->phenol=0;
             this->octane=0;
+            this->NitroFuel=0;
 		 }
 		 void OutPutInformation(){//输出内部内容 
 		 	//cout<<"甲烷产量："<<this->methane<<endl;
-		 	printf("甲烷产量：%lf\n",this->methane); 
+		 	printf("甲烷产量：%lf\n",this->methane/(float)15); 
 		 	//cout<<"乙烷产量："<<this->ethane<<endl;
-		 	printf("乙烷产量：%lf\n",this->ethane); 
+		 	printf("乙烷产量：%lf\n",this->ethane/(float)15); 
 			//cout<<"丙烷产量："<<this->propane<<endl;
-		 	printf("丙烷产量：%lf\n",this->propane); 
+		 	printf("丙烷产量：%lf\n",this->propane/(float)15); 
 			//cout<<"丁烷产量："<<this->butane<<endl; 
-		 	printf("丁烷产量：%lf\n",this->butane); 
+		 	printf("丁烷产量：%lf\n",this->butane/(float)15); 
 			//cout<<"氦气产量："<<this->helium<<endl;
-            printf("辛烷产量：%lf\n",this->octane);
-		 	printf("氦气产量：%lf\n",this->helium); 
+            printf("辛烷产量：%lf\n",this->octane/(float)15);
+		 	printf("氦气产量：%lf\n",this->helium/(float)15); 
 			//cout<<"甲苯产量："<<this->toluene<<endl;
-		 	printf("甲苯产量：%lf\n",this->toluene); 
+		 	printf("甲苯产量：%lf\n",this->toluene/(float)15); 
 			//cout<<"苯产量："<<this->benzene<<endl;
-		 	printf("苯产量：%lf\n",this->benzene); 
+		 	printf("苯产量：%lf\n",this->benzene/(float)15); 
 			//cout<<"乙烯产量："<<this->vinyl<<endl;
-		 	printf("乙烯产量：%lf\n",this->vinyl); 
+		 	printf("乙烯产量：%lf\n",this->vinyl/(float)15); 
 			//cout<<"丙烯产量："<<this->acrylic<<endl;
-		 	printf("丙烯产量：%lf\n",this->acrylic); 
+		 	printf("丙烯产量：%lf\n",this->acrylic/(float)15); 
 			//cout<<"丁烯产量："<<this->butene<<endl;
-		 	printf("丁烯产量：%lf\n",this->butene); 
+		 	printf("丁烯产量：%lf\n",this->butene/(float)15); 
 			//cout<<"丁二烯产量："<<this->butadiene<<endl;
-		 	printf("丁二烯产量：%lf\n",this->butadiene); 
+		 	printf("丁二烯产量：%lf\n",this->butadiene/(float)15); 
 			//cout<<"小撮碳粉产量："<<this->TinyCarbonDust<<endl;
-			printf("苯酚产量：%lf\n",this->phenol);
-		 	printf("小撮碳粉产量：%lf\n",TinyCarbonDust);  
+			printf("苯酚产量：%lf\n",this->phenol/(float)15);
+		 	printf("小撮碳粉产量：%lf\n",TinyCarbonDust/(float)15);  
+		 	printf("高十六烷柴油产量：%lf\n",this->NitroFuel/(float)15); 
 		 } 
-		 void MethaneAdd(int num){
+		 void MethaneAdd(double num){
 		 	this->methane=this->methane+num;
 		 }
-		 void EthaneAdd(int num){
+		 void EthaneAdd(double num){
 		 	this->ethane=this->ethane+num;
 		 }	
-		 void PropaneAdd(int num){
+		 void PropaneAdd(double num){
 		 	this->propane=this->propane+num;
 		 }
-		 void ButaneAdd(int num){
+		 void ButaneAdd(double num){
 		 	this->butane=this->butane+num;
 		 }
-		 void HeliumAdd(int num){
+		 void HeliumAdd(double num){
 		 	this->helium=this->helium+num;
 		 }
-		 void TolueneAdd(int num){
+		 void TolueneAdd(double num){
 		 	this->toluene=this->toluene+num;
 		 }
-		 void BenezeAdd(int num){
+		 void BenezeAdd(double num){
 		 	this->benzene=this->benzene+num;
 		 }
-		 void VinylAdd(int num){
+		 void VinylAdd(double num){
 		 	this->vinyl=this->vinyl+num;
 		 }
-		 void AcrylicAdd(int num){
+		 void AcrylicAdd(double num){
 		 	this->acrylic=this->acrylic+num; 
 		 }
-		 void ButeneAdd(int num){
+		 void ButeneAdd(double num){
 		 	this->butene=this->butene+num;
 		 }
-		 void ButadieneAdd(int num){
+		 void ButadieneAdd(double num){
 		 	this->butadiene=this->butadiene+num;
 		 }
-		 void TinyCarbonDustAdd(int num){
+		 void TinyCarbonDustAdd(double num){
 		 	this->TinyCarbonDust=this->TinyCarbonDust+num;
 		 }
-	     void PhenolAdd(int num){
+	     void PhenolAdd(double num){
 	     	this->phenol=this->phenol+num;
 		 }
-         void OctaneAdd(int num){
+         void OctaneAdd(double num){
             this->octane=this->octane+num;
          }
+         void NitroFuelAdd(double num){
+         	this->NitroFuel=this->NitroFuel+num;
+		 }	
 	};
 	
 	public:
@@ -294,6 +301,8 @@ class All{
                 this->NaphthaAmount=this->NaphthaAmount+0.125*this->HeavyOilAmount;
                 this->HeavyOilAmount=0;
 		 		break;
+		 	case -1://不裂化 
+			    break; 
 		 } 
 	}
 	void LightOilCrack(){//裂化后蒸馏轻燃油 
@@ -370,6 +379,8 @@ class All{
                 this->NaphthaAmount=this->NaphthaAmount+0.1*this->LightOilAmount;
                 this->LightOilAmount=0;
 		 		break; 
+		 	case -1:
+		 		break;
         }
 	}
 	void NaphthaCrack(){//裂化后蒸馏石脑油 
@@ -440,6 +451,8 @@ class All{
                 this->HeavyOilAmount=this->HeavyOilAmount+0.025*this->NaphthaAmount;
                 this->NaphthaAmount=0;
 		 		break;
+		 	case -1:
+		 		break;
         }
 	}
     void GasCrack(){//裂化后蒸馏炼油气
@@ -494,6 +507,8 @@ class All{
                 Products.TinyCarbonDustAdd(0.001*this->GasAmount);
                 this->GasAmount=0;
                 break;
+            case -1:
+			    break; 
         } 
     }
 	void Initialization(){//初始化数据 
@@ -506,6 +521,7 @@ class All{
 		NaphthaCrackedType=-1;
 		GasCrackedType=-1;
 		this->Products.Initialization();
+		GetFuel=0; 
 	}
 	void GetCrackedType(int H,int L,int N,int G){//获取裂化的方式 
 		HeavyOilCrackedType=H;
@@ -524,12 +540,30 @@ class All{
 		this->Products.OutPutInformation();
 	}
 	void Crack(){
-		while(this->HeavyOilAmount>1e-7||this->LightOilAmount>1e-7||this->NaphthaAmount>1e-7){
+		while((this->HeavyOilAmount>1e-7&&this->HeavyOilCrackedType!=-1)||(this->LightOilAmount>1e-7&&this->LightOilCrackedType!=-1)||(this->NaphthaAmount>1e-7&&this->NaphthaCrackedType!=-1)||(this->GasAmount>1e-7&&this->GasCrackedType!=-1)){
 			this->HeavyOilCrack();
 			this->LightOilCrack();
 			this->NaphthaCrack();
 			this->GasCrack();
 		}
+	}
+	void MakeFuel(){
+		if(this->GetFuel==1){
+			if(this->LightOilAmount>=5*this->HeavyOilAmount){
+				this->LightOilAmount=this->LightOilAmount-5*this->HeavyOilAmount;
+				Products.NitroFuelAdd(this->HeavyOilAmount*6);
+				this->HeavyOilAmount=0;
+			}else if(this->LightOilAmount<5*this->HeavyOilAmount){
+				this->HeavyOilAmount=this->HeavyOilAmount-this->LightOilAmount/5;
+				Products.NitroFuelAdd(this->LightOilAmount*1.2);
+				this->LightOilAmount=0;
+			}
+		}else if(this->GetFuel==0){
+			//donothing;
+		}
+	}
+	void IfGetFuel(int c){
+		this->GetFuel=c;
 	}	
 }; 
 int main(){
@@ -556,6 +590,7 @@ int main(){
 			}
 			Oil.GetOilTypeAndAmount(InputType);
 			//Oil.OutPutData();
+			//后期需要注释掉上面的代码 
 		}catch(int Exception){
 			if(Exception==InvalidValueException){
 				cout<<"输入的数据不能小于0或者大于5";
@@ -565,15 +600,19 @@ int main(){
 		Calc.Initialization();
 		Calc.ReceivedData(Oil);
 		//Calc.GetCrackedType(5,4,4,0);
+		cout<<"请输入是否制作高十六烷柴油，如果制作，输入1，否则输入0"<<endl;
+		int c;
+		scanf("%d",&c);
+		Calc.IfGetFuel(c);
 		cout<<"请输入裂化的方式（按照重燃油-轻燃油-石脑油-炼油气 的顺序）："<<endl;
-		cout<<"从1到6，分别对应轻氢，中氢，重氢，轻蒸汽，中蒸汽，重蒸汽，此外对于重燃油和炼油气，0代表直接蒸馏"<<endl;
+		cout<<"从1到6，分别对应轻氢，中氢，重氢，轻蒸汽，中蒸汽，重蒸汽，-1对应该产物不裂解，此外对于重燃油和炼油气，0代表直接蒸馏"<<endl;
 		cout<<"输入例子："<<endl;
 		cout<<"0 1 1 0"<<endl;
 		cout<<"这个例子代表，重燃油和炼油气直接蒸馏，轻燃油和石脑油选择轻氢裂化"<<endl; 
 		int type1,type2,type3,type4;
 		try{
 			scanf("%d %d %d %d",&type1,&type2,&type3,&type4);
-			if(type1<0||type1>6||type2<1||type2>6||type3<1||type3>6||type4<0||type4>6){
+			if(type1<-1||type1>6||type2<-1||type2>6||type3<-1||type3>6||type4<-1||type4>6||type2==0||type3==0){
 				throw InvalidValueException;
 			}
 		}catch(int Exception){
@@ -582,8 +621,10 @@ int main(){
 				continue;
 			}
 		} 
+		Calc.MakeFuel();
 		Calc.GetCrackedType(type1,type2,type3,type4);
 		Calc.Crack(); 
+		cout<<"每1000mB该原油的彻底裂解产物和燃料产物为（单位：mB）："<<endl; 
     	Calc.OutputData();
     				
 		}else if(judge==0){
