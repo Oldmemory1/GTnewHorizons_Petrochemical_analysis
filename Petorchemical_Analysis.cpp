@@ -580,7 +580,7 @@ int main(){
 		Calc.GetCrackedType(type1,type2,type3,type4);
 		Calc.Crack(); 
     	Calc.OutputData();
-    	return 0;			
+    				
 		}else if(judge==0){
 				break;
 		}
