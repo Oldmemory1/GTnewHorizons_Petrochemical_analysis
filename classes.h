@@ -62,6 +62,7 @@ class oil{
 			    break; 	
 	   }
     }
+    
     void OutPutData(){//输出数据用来检验 
     	cout<<"原油类型号："<<this->TypeInInt<<endl;
     	cout<<"原油类型："<<this->TypeInString<<endl;
@@ -78,6 +79,14 @@ class oil{
 	}
 	double GetGasAmount(){
 		return this->GasAmount;
+	}
+	void Initialization(){
+		this->GasAmount=0;
+		this->HeavyOilAmount=0;
+		this->NaphthaAmount=0;
+		this->LightOilAmount=0;
+		this->TypeInInt=-1;
+		this->TypeInString="";
 	}
 };
 class All{
@@ -439,7 +448,7 @@ class All{
                 Products.ButaneAdd(0.06*this->GasAmount);
                 Products.PropaneAdd(0.07*this->GasAmount);
                 Products.EthaneAdd(0.1*this->GasAmount);
-                Products.MethaneAdd(0.75*this->GasAmount);\
+                Products.MethaneAdd(0.75*this->GasAmount);
                 Products.HeliumAdd(0.02*this->GasAmount);
                 this->GasAmount=0; 
                 break;
@@ -515,10 +524,11 @@ class All{
 		this->Products.OutPutInformation();
 	}
 	void Crack(){
-		while(this->HeavyOilAmount>1e-5||this->LightOilAmount>1e-5||this->NaphthaAmount>1e-5){
+		while(this->HeavyOilAmount>1e-7||this->LightOilAmount>1e-7||this->NaphthaAmount>1e-7){
 			this->HeavyOilCrack();
 			this->LightOilCrack();
 			this->NaphthaCrack();
+			this->GasCrack();
 		}
 	}	
 }; 
