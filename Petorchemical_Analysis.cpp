@@ -536,6 +536,7 @@ int main(){
 	int judge=0; 
 	oil Oil;
 	All Calc;
+	cout<<"此程序用于计算15000mB的各种油的石化产物情况。"<<endl;
 	while(true){
 		
 		cout<<"输入1启动运算程序，输入0结束运算程序"<<endl;
@@ -545,6 +546,9 @@ int main(){
 		int InputType=0;
 		cout<<"请输入油的类别："<<endl;
 		cout<<"1为BC原油，2为GT轻油，3为GT原油，4为GT重油，5为GT极重油"<<endl; 
+		cout<<"输入例子："<<endl;
+		cout<<"1"<<endl;
+		cout<<"这个例子代表选择计算15B的BC原油的石化产物情况"<<endl; 
 		try{	
 			scanf("%d",&InputType);
 			if(InputType<1||InputType>5){
@@ -561,10 +565,11 @@ int main(){
 		Calc.Initialization();
 		Calc.ReceivedData(Oil);
 		//Calc.GetCrackedType(5,4,4,0);
-		cout<<"请输入裂化的方式："<<endl;
+		cout<<"请输入裂化的方式（按照重燃油-轻燃油-石脑油-炼油气 的顺序）："<<endl;
 		cout<<"从1到6，分别对应轻氢，中氢，重氢，轻蒸汽，中蒸汽，重蒸汽，此外对于重燃油和炼油气，0代表直接蒸馏"<<endl;
 		cout<<"输入例子："<<endl;
 		cout<<"0 1 1 0"<<endl;
+		cout<<"这个例子代表，重燃油和炼油气直接蒸馏，轻燃油和石脑油选择轻氢裂化"<<endl; 
 		int type1,type2,type3,type4;
 		try{
 			scanf("%d %d %d %d",&type1,&type2,&type3,&type4);
