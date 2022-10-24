@@ -95,7 +95,7 @@ class All{
 	double LightOilAmount;
 	double NaphthaAmount;
 	double GasAmount;
-	int GetFuel;//为0时，不生产高十六，为1时，生产高16 
+	int GetFuel;//为0时，不生产高十六，为1时，生产柴油 
 	int HeavyOilCrackedType;//重燃油裂化方式
 	// 0：直接蒸馏 1：轻度氢气 2：中度氢气 3：重度氢气 4：轻度蒸汽 5：中度蒸汽 6：重度蒸汽 
 	int LightOilCrackedType;//轻燃油裂化方式 
@@ -124,7 +124,7 @@ class All{
 		 double butadiene;//丁二烯 
 		 double phenol;//苯酚 
 		 double TinyCarbonDust;//小撮碳粉	
-		 double NitroFuel;//高十六 
+		 double Fuel;//柴油 
 		 public:
 		 void Initialization(){
 		 	this->methane=0;
@@ -141,7 +141,7 @@ class All{
 			this->TinyCarbonDust=0; 
 			this->phenol=0;
             this->octane=0;
-            this->NitroFuel=0;
+            this->Fuel=0;
 		 }
 		 void OutPutInformation(){//输出内部内容 
 		 	//cout<<"甲烷产量："<<this->methane<<endl;
@@ -170,7 +170,7 @@ class All{
 			//cout<<"小撮碳粉产量："<<this->TinyCarbonDust<<endl;
 			printf("苯酚产量：%lf\n",this->phenol/(float)15);
 		 	printf("小撮碳粉产量：%lf\n",TinyCarbonDust/(float)15);  
-		 	printf("高十六烷柴油产量：%lf\n",this->NitroFuel/(float)15); 
+		 	printf("柴油产量：%lf\n",this->Fuel/(float)15); 
 		 } 
 		 void MethaneAdd(double num){
 		 	this->methane=this->methane+num;
@@ -214,8 +214,8 @@ class All{
          void OctaneAdd(double num){
             this->octane=this->octane+num;
          }
-         void NitroFuelAdd(double num){
-         	this->NitroFuel=this->NitroFuel+num;
+         void FuelAdd(double num){
+         	this->Fuel=this->Fuel+num;
 		 }	
 	};
 	
@@ -465,7 +465,7 @@ class All{
                 Products.HeliumAdd(0.02*this->GasAmount);
                 this->GasAmount=0; 
                 break;
-            case 1:break;
+            case 1:
                 Products.HeliumAdd(0.1*this->GasAmount);
                 Products.MethaneAdd(1.3*this->GasAmount);
                 this->GasAmount=0; 
@@ -545,17 +545,18 @@ class All{
 			this->LightOilCrack();
 			this->NaphthaCrack();
 			this->GasCrack();
+			//printf("%lf %lf %lf %lf\n",this->HeavyOilAmount,this->LightOilAmount,this->NaphthaAmount,this->GasAmount);
 		}
 	}
 	void MakeFuel(){
 		if(this->GetFuel==1){
 			if(this->LightOilAmount>=5*this->HeavyOilAmount){
 				this->LightOilAmount=this->LightOilAmount-5*this->HeavyOilAmount;
-				Products.NitroFuelAdd(this->HeavyOilAmount*6);
+				Products.FuelAdd(this->HeavyOilAmount*6);
 				this->HeavyOilAmount=0;
 			}else if(this->LightOilAmount<5*this->HeavyOilAmount){
 				this->HeavyOilAmount=this->HeavyOilAmount-this->LightOilAmount/5;
-				Products.NitroFuelAdd(this->LightOilAmount*1.2);
+				Products.FuelAdd(this->LightOilAmount*1.2);
 				this->LightOilAmount=0;
 			}
 		}else if(this->GetFuel==0){
@@ -600,7 +601,7 @@ int main(){
 		Calc.Initialization();
 		Calc.ReceivedData(Oil);
 		//Calc.GetCrackedType(5,4,4,0);
-		cout<<"请输入是否制作高十六烷柴油，如果制作，输入1，否则输入0"<<endl;
+		cout<<"请输入是否制作柴油，如果制作，输入1，否则输入0"<<endl;
 		int c;
 		scanf("%d",&c);
 		Calc.IfGetFuel(c);
