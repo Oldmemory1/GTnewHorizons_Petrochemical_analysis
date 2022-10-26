@@ -697,7 +697,8 @@ class All{
 		return this->Products.GetVinylAmount();
 	}
 }; 
-struct Outputs{
+class Outputs{
+	public:
 	int OilType;
 	//double HeavyOilAmount;
 	//double LightOilAmount;
@@ -723,80 +724,122 @@ struct Outputs{
 	double TinyCarbonDust;//小撮碳粉	
 	double Fuel;//柴油 
     double CetaneBoostedDiesel;//高十六 
+    void OutputData(){
+	switch(this->OilType){
+		case 1:cout<<"BC原油"<<endl;break;
+		case 2:cout<<"GT轻油"<<endl;break;
+		case 3:cout<<"GT原油"<<endl;break;
+		case 4:cout<<"GT重油"<<endl;break;	 
+		case 5:cout<<"GT极重油"<<endl;break;
+	}
+	switch(this->HeavyOilCrackedType){
+		case 0:cout<<"重燃油直接蒸馏"<<endl;break;
+		case 1:cout<<"重燃油轻氢裂化"<<endl;break;
+		case 2:cout<<"重燃油中氢裂化"<<endl;break;
+		case 3:cout<<"重燃油重氢裂化"<<endl;break;
+		case 4:cout<<"重燃油轻蒸裂化"<<endl;break;
+		case 5:cout<<"重燃油中蒸裂化"<<endl;break;
+		case 6:cout<<"重燃油重蒸裂化"<<endl;break;
+	} 
+	switch(this->LightOilCrackedType){
+		case 1:cout<<"轻燃油轻氢裂化"<<endl;break;
+		case 2:cout<<"轻燃油中氢裂化"<<endl;break;
+		case 3:cout<<"轻燃油重氢裂化"<<endl;break;
+		case 4:cout<<"轻燃油轻蒸裂化"<<endl;break;
+		case 5:cout<<"轻燃油中蒸裂化"<<endl;break;
+		case 6:cout<<"轻燃油重蒸裂化"<<endl;break;		
+	}
+	switch(this->NaphthaCrackedType){
+		case 1:cout<<"石脑油轻氢裂化"<<endl;break;
+		case 2:cout<<"石脑油中氢裂化"<<endl;break;
+		case 3:cout<<"石脑油重氢裂化"<<endl;break;
+		case 4:cout<<"石脑油轻蒸裂化"<<endl;break;
+		case 5:cout<<"石脑油中蒸裂化"<<endl;break;
+		case 6:cout<<"石脑油重蒸裂化"<<endl;break;			
+	}
+	switch(this->GasCrackedType){
+		case 0:cout<<"炼油气直接蒸馏"<<endl;break;
+		case 1:cout<<"炼油气轻氢裂化"<<endl;break;
+		case 2:cout<<"炼油气中氢裂化"<<endl;break;
+		case 3:cout<<"炼油气重氢裂化"<<endl;break;
+		case 4:cout<<"炼油气轻蒸裂化"<<endl;break;
+		case 5:cout<<"炼油气中蒸裂化"<<endl;break;
+		case 6:cout<<"炼油气重蒸裂化"<<endl;break;		
+	}
+	
+	
+	printf("甲烷产量：%lf\n",this->methane/double(15)); 
+	printf("乙烷产量：%lf\n",this->ethane/double(15)); 
+	printf("丙烷产量：%lf\n",this->propane/double(15)); 
+	printf("丁烷产量：%lf\n",this->butane/double(15)); 
+    printf("辛烷产量：%lf\n",this->octane/double(15));
+	printf("氦气产量：%lf\n",this->helium/double(15)); 
+	printf("甲苯产量：%lf\n",this->toluene/double(15)); 
+	printf("苯产量：%lf\n",this->benzene/double(15)); 
+	printf("乙烯产量：%lf\n",this->vinyl/double(15)); 
+	printf("丙烯产量：%lf\n",this->acrylic/double(15)); 
+	printf("丁烯产量：%lf\n",this->butene/double(15)); 
+	printf("丁二烯产量：%lf\n",this->butadiene/double(15));
+	printf("苯酚产量：%lf\n",this->phenol/double(15));
+	printf("小撮碳粉产量：%lf\n",this->TinyCarbonDust/double(15));  
+	printf("柴油产量：%lf\n",this->Fuel/double(15)); 
+	printf("高十六产量：%lf\n",this->CetaneBoostedDiesel/double(15));    	
+	}
 };
-void OutputStruct(struct Outputs AOutPut){
-	printf("石油种类：%d\n",AOutPut.OilType);
-	printf("重燃油裂化方式：%d\n",AOutPut.HeavyOilCrackedType);
-	printf("轻燃油裂化方式：%d\n",AOutPut.LightOilCrackedType);
-	printf("石脑油裂化方式：%d\n",AOutPut.NaphthaCrackedType);
-	printf("炼油气裂化方式：%d\n",AOutPut.GasCrackedType);	 
-	printf("甲烷产量：%lf\n",AOutPut.methane/double(15)); 
-	printf("乙烷产量：%lf\n",AOutPut.ethane/double(15)); 
-	printf("丙烷产量：%lf\n",AOutPut.propane/double(15)); 
-	printf("丁烷产量：%lf\n",AOutPut.butane/double(15)); 
-    printf("辛烷产量：%lf\n",AOutPut.octane/double(15));
-	printf("氦气产量：%lf\n",AOutPut.helium/double(15)); 
-	printf("甲苯产量：%lf\n",AOutPut.toluene/double(15)); 
-	printf("苯产量：%lf\n",AOutPut.benzene/double(15)); 
-	printf("乙烯产量：%lf\n",AOutPut.vinyl/double(15)); 
-	printf("丙烯产量：%lf\n",AOutPut.acrylic/double(15)); 
-	printf("丁烯产量：%lf\n",AOutPut.butene/double(15)); 
-	printf("丁二烯产量：%lf\n",AOutPut.butadiene/double(15));
-	printf("苯酚产量：%lf\n",AOutPut.phenol/double(15));
-	printf("小撮碳粉产量：%lf\n",AOutPut.TinyCarbonDust/double(15));  
-	printf("柴油产量：%lf\n",AOutPut.Fuel/double(15)); 
-	printf("高十六产量：%lf\n",AOutPut.CetaneBoostedDiesel/double(15));
-}
+
 int MethaneCompare(const void *a ,const void *b) { 
-    return (*(struct Outputs*)b).methane-(*(struct Outputs*)a).methane; 
+    return (*(Outputs*)b).methane-(*(Outputs*)a).methane; 
 }
 int EthaneCompare(const void *a,const void *b){
-	return (*(struct Outputs*)b).ethane-(*(struct Outputs*)a).ethane;
+	return (*(Outputs*)b).ethane-(*(Outputs*)a).ethane;
 } 
 int PropaneCompare(const void *a,const void *b){
-	return (*(struct Outputs*)b).propane-(*(struct Outputs*)a).propane;
+	return (*(Outputs*)b).propane-(*(Outputs*)a).propane;
 }
 int ButaneCompare(const void *a,const void *b){
-	return (*(struct Outputs*)b).butane-(*(struct Outputs*)a).butane;
+	return (*(Outputs*)b).butane-(*(Outputs*)a).butane;
 }
 int OctaneCompare(const void *a,const void *b){
-	return (*(struct Outputs*)b).octane-(*(struct Outputs*)a).octane;
+	return (*(Outputs*)b).octane-(*(Outputs*)a).octane;
 }
 int HeliumCompare(const void *a,const void *b){
-	return (*(struct Outputs*)b).helium-(*(struct Outputs*)a).helium;
+	return (*(Outputs*)b).helium-(*(Outputs*)a).helium;
 }
 int BenzeneCompare(const void *a,const void *b){
-	return (*(struct Outputs*)b).benzene-(*(struct Outputs*)a).benzene;
+	return (*(Outputs*)b).benzene-(*(Outputs*)a).benzene;
 }
 int TolueneCompare(const void *a,const void *b){
-	return (*(struct Outputs*)b).toluene-(*(struct Outputs*)a).toluene;	
+	return (*(Outputs*)b).toluene-(*(Outputs*)a).toluene;	
 }
 int VinylCompare(const void *a,const void *b){
-	return (*(struct Outputs*)b).vinyl-(*(struct Outputs*)a).vinyl;
+	return (*(Outputs*)b).vinyl-(*(Outputs*)a).vinyl;
 }
 int AcrylicCompare(const void *a,const void *b){
-	return (*(struct Outputs*)b).acrylic-(*(struct Outputs*)a).acrylic;
+	return (*(Outputs*)b).acrylic-(*(Outputs*)a).acrylic;
 }
 int ButeneCompare(const void *a,const void *b){
-	return (*(struct Outputs*)b).butene-(*(struct Outputs*)a).butene;
+	return (*(Outputs*)b).butene-(*(Outputs*)a).butene;
 } 
 int ButadieneCompare(const void *a,const void *b){
-	return (*(struct Outputs*)b).butadiene-(*(struct Outputs*)a).butadiene;
+	return (*(Outputs*)b).butadiene-(*(Outputs*)a).butadiene;
 }
 int PhenolCompare(const void *a,const void *b){
-	return (*(struct Outputs*)b).phenol-(*(struct Outputs*)a).phenol;
+	return (*(Outputs*)b).phenol-(*(Outputs*)a).phenol;
 }
 int TinyCarbonDustCompare(const void *a,const void *b){
-	return (*(struct Outputs*)b).TinyCarbonDust-(*(struct Outputs*)a).TinyCarbonDust;
+	return (*(Outputs*)b).TinyCarbonDust-(*(Outputs*)a).TinyCarbonDust;
 }
 int FuelCompare(const void *a,const void *b){
-	return (*(struct Outputs*)b).Fuel-(*(struct Outputs*)a).Fuel;
+	return (*(Outputs*)b).Fuel-(*(Outputs*)a).Fuel;
 }
 int CetaneBoostedDieselCompare(const void *a,const void *b){
-	return (*(struct Outputs*)b).CetaneBoostedDiesel-(*(struct Outputs*)a).CetaneBoostedDiesel;
+	return (*(Outputs*)b).CetaneBoostedDiesel-(*(Outputs*)a).CetaneBoostedDiesel;
 }
 int main(){
-	struct Outputs OutPutData[1764];
+	Outputs OutPutData[1764];
+	int MakeFuel=0;
+	cout<<"是否考虑制作柴油，若考虑则输入1，否则输入0"<<endl;
+	scanf("%d",&MakeFuel);
 	int cnt=0;
 	oil Oil;
 	All Calc;
@@ -811,6 +854,8 @@ int main(){
     					Calc.Initialization();
     					Calc.ReceivedData(Oil);
     					Calc.GetCrackedType(b,c,d,e);
+    					Calc.IfGetFuel(MakeFuel);
+    					Calc.MakeFuel();
     					Calc.Crack();
     					//Calc.OutputData();
     					OutPutData[cnt].OilType=a;
@@ -846,44 +891,44 @@ int main(){
 			}
 		}
 		qsort(OutPutData,1764,sizeof(Outputs),MethaneCompare);
-		printf("原油情况为%d时，最大输出的甲烷及所用裂解方式为：",a);
-		OutputStruct(OutPutData[0]);
+		printf("原油情况为%d时，最大输出的甲烷及所用裂解方式为：\n",a);
+		OutPutData[0].OutputData(); 
 		qsort(OutPutData,1764,sizeof(Outputs),EthaneCompare);
-		printf("原油情况为%d时，最大输出的乙烷及所用裂解方式为：",a);
-		OutputStruct(OutPutData[0]);
+		printf("原油情况为%d时，最大输出的乙烷及所用裂解方式为：\n",a);
+		OutPutData[0].OutputData(); 
 		qsort(OutPutData,1764,sizeof(Outputs),PropaneCompare);
-		printf("原油情况为%d时，最大输出的丙烷及所用裂解方式为：",a);
-		OutputStruct(OutPutData[0]);
+		printf("原油情况为%d时，最大输出的丙烷及所用裂解方式为：\n",a);
+		OutPutData[0].OutputData(); 
 		qsort(OutPutData,1764,sizeof(Outputs),ButaneCompare);
-		printf("原油情况为%d时，最大输出的丁烷及所用裂解方式为：",a);
-		OutputStruct(OutPutData[0]);
+		printf("原油情况为%d时，最大输出的丁烷及所用裂解方式为：\n",a);
+		OutPutData[0].OutputData(); 
 		qsort(OutPutData,1764,sizeof(Outputs),OctaneCompare);
-		printf("原油情况为%d时，最大输出的辛烷及所用裂解方式为：",a);
-		OutputStruct(OutPutData[0]);
+		printf("原油情况为%d时，最大输出的辛烷及所用裂解方式为：\n",a);
+		OutPutData[0].OutputData(); 
 		qsort(OutPutData,1764,sizeof(Outputs),HeliumCompare);
-		printf("原油情况为%d时，最大输出的氦气及所用裂解方式为：",a);
-		OutputStruct(OutPutData[0]);
+		printf("原油情况为%d时，最大输出的氦气及所用裂解方式为：\n",a);
+		OutPutData[0].OutputData(); 
 		qsort(OutPutData,1764,sizeof(Outputs),TolueneCompare);
-		printf("原油情况为%d时，最大输出的甲苯及所用裂解方式为：",a);
-		OutputStruct(OutPutData[0]);
+		printf("原油情况为%d时，最大输出的甲苯及所用裂解方式为：\n",a);
+		OutPutData[0].OutputData(); 
 		qsort(OutPutData,1764,sizeof(Outputs),BenzeneCompare);
-		printf("原油情况为%d时，最大输出的苯及所用裂解方式为：",a);
-		OutputStruct(OutPutData[0]);
+		printf("原油情况为%d时，最大输出的苯及所用裂解方式为：\n",a);
+		OutPutData[0].OutputData(); 
 		qsort(OutPutData,1764,sizeof(Outputs),VinylCompare);
-		printf("原油情况为%d时，最大输出的乙烯及所用裂解方式为：",a);
-		OutputStruct(OutPutData[0]);
+		printf("原油情况为%d时，最大输出的乙烯及所用裂解方式为：\n",a);
+		OutPutData[0].OutputData(); 
 		qsort(OutPutData,1764,sizeof(Outputs),AcrylicCompare);
-		printf("原油情况为%d时，最大输出的丙烯及所用裂解方式为：",a);
-		OutputStruct(OutPutData[0]);
+		printf("原油情况为%d时，最大输出的丙烯及所用裂解方式为：\n",a);
+		OutPutData[0].OutputData(); 
 		qsort(OutPutData,1764,sizeof(Outputs),ButeneCompare);
-		printf("原油情况为%d时，最大输出的丁烯及所用裂解方式为：",a);
-		OutputStruct(OutPutData[0]);
+		printf("原油情况为%d时，最大输出的丁烯及所用裂解方式为：\n",a);
+		OutPutData[0].OutputData(); 
 		qsort(OutPutData,1764,sizeof(Outputs),ButadieneCompare);
-		printf("原油情况为%d时，最大输出的丁二烯及所用裂解方式为：",a);
-		OutputStruct(OutPutData[0]);
+		printf("原油情况为%d时，最大输出的丁二烯及所用裂解方式为：\n",a);
+		OutPutData[0].OutputData(); 
 		qsort(OutPutData,1764,sizeof(Outputs),PhenolCompare);
-		printf("原油情况为%d时，最大输出的苯酚及所用裂解方式为：",a);
-		OutputStruct(OutPutData[0]);
+		printf("原油情况为%d时，最大输出的苯酚及所用裂解方式为：\n",a);
+		OutPutData[0].OutputData(); 
 		 
 	}
     return 0;
