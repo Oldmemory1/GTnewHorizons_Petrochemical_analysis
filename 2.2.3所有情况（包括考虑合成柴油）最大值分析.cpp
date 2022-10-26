@@ -931,6 +931,7 @@ int main(){
 		OutPutData[0].OutputData(); 
 		 
 	}
+    system("pause");
     return 0;
 
 }
